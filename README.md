@@ -1,5 +1,5 @@
 # NanoSIMS Stabilizer Python version
-This repository contains the python source code for our NanoSIMS stabilizer plugin which allows the batch processing and GPU acceleration
+This repository contains the python source code for our NanoSIMS stabilizer which allows batch processing and GPU acceleration
 
 If you prefer ImageJ plugin which is much easier for use, please go to https://github.com/Luchixiang/Nanosims_stabilize for more details. 
 
@@ -32,3 +32,6 @@ cd core
 python stabilize_batch.py --path file_path --save_path _save_file_path --channel 32S
 ```
 Please replace the ``--path`` with the folder stored NanoSIMS files you want to stabilize and `--save_path ` with the folder you want to store the stabilized files.
+
+
+This repository use [RAFT](https://github.com/princeton-vl/RAFT) for reference. 
