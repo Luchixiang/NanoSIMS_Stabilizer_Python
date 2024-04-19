@@ -31,7 +31,7 @@ Also please indicate the signal channel which used to calculate the transformati
 We provide a demo file. To register the demo file:
 ```shell
 cd core
-python stabilize.py --file ./demo/201907ASO_transfect_BrASO_1.nrrd --save_file ./demo/201907ASO_transfect_BrASO_1_stabled.nrrd --channel -
+python stabilize.py --file ./demo/demo_data.nrrd --save_file ./demo/demo_data_registered.nrrd --channel -
 ```
 ## Batch Stabilize NanoSIMS files
 ```Shell
