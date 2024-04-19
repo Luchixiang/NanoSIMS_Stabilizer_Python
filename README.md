@@ -19,19 +19,19 @@ pip install -r requirments.txt
 ```
 
 ## Stabilize Single NanoSIMS file
-
+We currently only support .nrrd file. If you only have .im file, you can batch convert the .im to .nrrd with OpenMIMS plugin. 
 ```Shell
 cd core
-python stabilize.py --file file_path --save_file _save_file_path --channel -
+python stabilize.py --file nanosims_file.nrrd --save_file nanosims_file_registered.nrrd --channel -
 ```
-Please replace the ``--file`` with the NanoSIMS file you want to stabilize (now only support .nrrd file) and `--save_file ` with the path you want to store the stabilized file.
+Please replace the ``--file`` with the NanoSIMS file you want to stabilize and `--save_file ` with the path you want to store the stabilized file.
 
-Also please indicate the signal channel which used to calculate the transformation map and apply it to other channels. Strong signal channel are recommended such as - (SE) or 32S.
+Also please indicate the signal channel which used to calculate the transformation map and apply it to other channels. Strong signal channel are recommended such as - (denotes SE) or 32S.
 
 We provide a demo file. To register the demo file:
 ```shell
 cd core
-python stabilize.py --file ./demo/ --save_file _save_file_path --channel -
+python stabilize.py --file ./demo/201907ASO_transfect_BrASO_1.nrrd --save_file ./demo/201907ASO_transfect_BrASO_1_stabled.nrrd --channel -
 ```
 ## Batch Stabilize NanoSIMS files
 ```Shell
