@@ -70,7 +70,7 @@ def demo(args):
     with torch.no_grad():
         img_name = path
         assert img_name.endswith('nrrd'), "only support nrrd file"
-        sequence, header = nrrd.read(os.path.join(path, img_name))  # (256, 256, 12, 4)
+        sequence, header = nrrd.read(img_name)  # (256, 256, 12, 4)
         sequence = np.transpose(sequence, (1, 0, 2, 3))  # (256, 256, 12, 4)
         output_sequence = [sequence[:, :, 0, :]]
         try:

@@ -1,19 +1,21 @@
 # NanoSIMS Stabilizer Python version
-This repository contains the python source code for our NanoSIMS stabilizer which allows batch processing and GPU acceleration
+This repository contains the python source code for our NanoSIMS stabilizer which allows batch processing and GPU acceleration (more than 10 time faster compared with ImageJ Plugin)
 
 If you prefer ImageJ plugin which is much easier for use, please go to https://github.com/Luchixiang/Nanosims_stabilize for more details. 
 
-## Requirements
-The code has been tested with PyTorch 1.6 and Cuda 10.1.
-```Shell
-conda create --name stabilizer
-conda activate raft
-conda install pytorch=1.6.0 torchvision=0.7.0 cudatoolkit=10.1 matplotlib tensorboard scipy opencv -c pytorch
-```
 
 ## Installation
 ```Shell
 git clone https://github.com/Luchixiang/NanoSIMS_Stabilizer_Python
+cd NanoSIMS_Stabilizer_Python
+```
+## Requirements
+The code has been tested with PyTorch 2.0. 
+```Shell
+conda create --name stabilizer python=3.9
+conda activate stabilizer
+conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 -c pytorch 
+pip install -r requirments.txt
 ```
 
 ## Stabilize Single NanoSIMS file
@@ -26,6 +28,11 @@ Please replace the ``--file`` with the NanoSIMS file you want to stabilize (now 
 
 Also please indicate the signal channel which used to calculate the transformation map and apply it to other channels. Strong signal channel are recommended such as - (SE) or 32S.
 
+We provide a demo file. To register the demo file:
+```shell
+cd core
+python stabilize.py --file ./demo/ --save_file _save_file_path --channel -
+```
 ## Batch Stabilize NanoSIMS files
 ```Shell
 cd core

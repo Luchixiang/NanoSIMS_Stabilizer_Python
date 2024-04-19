@@ -69,7 +69,6 @@ def demo(args):
 
     with torch.no_grad():
         for img_name in os.listdir(path):
-
             if not img_name.endswith('nrrd'):
                 continue
             try:
