@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from typing import List
 
 
 class ResidualBlock(nn.Module):
@@ -165,14 +166,11 @@ class BasicEncoder(nn.Module):
         return nn.Sequential(*layers)
 
 
-    def forward(self, x):
+    def forward(self, inputx: List[torch.Tensor]):
 
         # if input is list, combine batch dimension
-        is_list = isinstance(x, tuple) or isinstance(x, list)
-        if is_list:
-            batch_dim = x[0].shape[0]
-            x = torch.cat(x, dim=0)
-
+        batch_dim = inputx[0].shape[0]
+        x = torch.cat(inputx, dim=0)
         x = self.conv1(x)
         x = self.norm1(x)
         x = self.relu1(x)
@@ -186,10 +184,10 @@ class BasicEncoder(nn.Module):
         if self.training and self.dropout is not None:
             x = self.dropout(x)
 
-        if is_list:
-            x = torch.split(x, [batch_dim, batch_dim], dim=0)
-
-        return x
+        if len(inputx) > 1:
+            outx = torch.split(x, [batch_dim, batch_dim], dim=0)
+            return outx
+        return [x]
 
 
 class SmallEncoder(nn.Module):

@@ -6,8 +6,7 @@ import torch.nn.functional as F
 from update import BasicUpdateBlock, SmallUpdateBlock
 from extractor import BasicEncoder, SmallEncoder
 from corr import CorrBlock, AlternateCorrBlock
-from utils.utils import bilinear_sampler, coords_grid, upflow8
-
+from utils.utils import bilinear_sampler, coords_grid, upflow8, accumulate_flows_torch
 try:
     autocast = torch.cuda.amp.autocast
 except:
@@ -96,22 +95,22 @@ class RAFT(nn.Module):
         cdim = self.context_dim
 
         # run the feature network
-        with autocast(enabled=self.args.mixed_precision):
-            fmap1, fmap2 = self.fnet([image1, image2])        
+        # with autocast(enabled=self.args.mixed_precision):
+        fmap1, fmap2 = self.fnet([image1, image2])
         
         fmap1 = fmap1.float()
         fmap2 = fmap2.float()
-        if self.args.alternate_corr:
-            corr_fn = AlternateCorrBlock(fmap1, fmap2, radius=self.args.corr_radius)
-        else:
-            corr_fn = CorrBlock(fmap1, fmap2, radius=self.args.corr_radius)
+        # if self.args.alternate_corr:
+        #     corr_fn = AlternateCorrBlock(fmap1, fmap2, radius=self.args.corr_radius)
+        # else:
+        corr_fn = CorrBlock(fmap1, fmap2, radius=4, num_levels=4)
 
         # run the context network
-        with autocast(enabled=self.args.mixed_precision):
-            cnet = self.cnet(image1)
-            net, inp = torch.split(cnet, [hdim, cdim], dim=1)
-            net = torch.tanh(net)
-            inp = torch.relu(inp)
+        # with autocast(enabled=self.args.mixed_precision):
+        cnet = self.cnet([image1])[0]
+        net, inp = torch.split(cnet, [hdim, cdim], dim=1)
+        net = torch.tanh(net)
+        inp = torch.relu(inp)
 
         coords0, coords1 = self.initialize_flow(image1)
 
@@ -125,8 +124,8 @@ class RAFT(nn.Module):
             corr = corr_fn(coords1) # index correlation volume
 
             flow = coords1 - coords0
-            with autocast(enabled=self.args.mixed_precision):
-                net, up_mask, delta_flow = self.update_block(net, inp, corr, flow)
+            # with autocast(enabled=self.args.mixed_precision):
+            net, up_mask, delta_flow = self.update_block(net, inp, corr, flow)
 
             # F(t+1) = F(t) + \Delta(t)
             coords1 = coords1 + delta_flow
@@ -138,9 +137,7 @@ class RAFT(nn.Module):
                 flow_up = self.upsample_flow(coords1 - coords0, up_mask)
             
             flow_predictions.append(flow_up)
-
-        # if test_mode:
-        #     return coords1 - coords0, flow_up
-        #
-        # return flow_predictions
+        flow_up = flow_predictions[-1]
+        if flow_up.shape[0] > 1:
+            flow_up = accumulate_flows_torch(flow_up)
         return flow_up
