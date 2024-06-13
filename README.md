@@ -22,7 +22,7 @@ pip install -r requirments.txt
 We currently only support .nrrd file. If you only have .im file, you can batch convert the .im to .nrrd with OpenMIMS plugin. 
 ```Shell
 cd core
-python stabilize.py --file nanosims_file.nrrd --save_file nanosims_file_registered.nrrd --channel -
+python stabilizev2.py --file nanosims_file.nrrd --save_file nanosims_file_registered.nrrd --channel -
 ```
 Please replace the ``--file`` with the NanoSIMS file you want to stabilize and `--save_file ` with the path you want to store the stabilized file.
 
@@ -31,14 +31,15 @@ Also please indicate the signal channel which used to calculate the transformati
 We provide a demo file. To register the demo file:
 ```shell
 cd core
-python stabilize.py --file ./demo/demo_data.nrrd --save_file ./demo/demo_data_registered.nrrd --channel -
+python stabilizev2.py --file ./demo/demo_data.nrrd --save_file ./demo/demo_data_registered.nrrd --channel -
 ```
 ## Batch Stabilize NanoSIMS files
 ```Shell
 cd core
-python stabilize_batch.py --path file_path --save_path _save_file_path --channel 32S
+python stabilizev2_batch.py --path file_path --save_path _save_file_path --channel 32S
 ```
 Please replace the ``--path`` with the folder stored NanoSIMS files you want to stabilize and `--save_path ` with the folder you want to store the stabilized files.
 
+We also release the model weight and pytorch jit script, which allows the deployment of the model without the Python environment. 
 
 This repository use [RAFT](https://github.com/princeton-vl/RAFT) for reference. 

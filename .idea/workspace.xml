@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cb024591-7cc9-40e2-96ea-70ad1fba8ef3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/core/stabilize_previous.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/stabilizev2_batch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/corr.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/corr.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/extractor.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/extractor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/raft.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/raft.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/update.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/update.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/utils/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/utils/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/stabilize_previous.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/stabilizev2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +122,7 @@
       <workItem from="1713525342009" duration="2085000" />
       <workItem from="1713536886255" duration="592000" />
       <workItem from="1713778775052" duration="51000" />
-      <workItem from="1718093209788" duration="33219000" />
+      <workItem from="1718093209788" duration="33518000" />
     </task>
     <servers />
   </component>
