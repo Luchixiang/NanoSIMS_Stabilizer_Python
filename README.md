@@ -1,7 +1,7 @@
 # NanoSIMS Stabilizer Python version
 This repository contains the python source code for our NanoSIMS stabilizer which allows batch processing and GPU acceleration (more than 10 time faster compared with ImageJ Plugin)
 
-If you prefer ImageJ plugin which is much easier for use, please go to https://github.com/Luchixiang/Nanosims_stabilize for more details. 
+If you prefer ImageJ plugin which is much easier for use, please go to [https://github.com/Luchixiang/Nanosims_stabilizer_plugin](https://github.com/Luchixiang/NanoSIMS_Stabilizer_Plugin) for more details. 
 
 
 ## Installation
